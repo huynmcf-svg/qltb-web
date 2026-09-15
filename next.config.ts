@@ -1,10 +1,21 @@
 import type { NextConfig } from 'next';
+import { normalizePublicApiBaseUrl } from './src/lib/api/public-url';
 
 const isProd = process.env.NODE_ENV === 'production';
 
+if (process.env.VERCEL) {
+  const raw = process.env.NEXT_PUBLIC_API_BASE_URL ?? '';
+  if (!raw || /localhost|127\.0\.0\.1/.test(raw)) {
+    throw new Error(
+      'Vercel: thiếu NEXT_PUBLIC_API_BASE_URL. Khai https://<qltb-service>.vercel.app/api/v1 ' +
+        'cho Production và Preview (Settings → Environment Variables), rồi Redeploy. Không dùng localhost.',
+    );
+  }
+}
+
 /** Origin của API để khai `connect-src`. Dev gọi thẳng service ở cổng khác. */
 function apiOrigin(): string | null {
-  const base = process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://localhost:3400/api/v1';
+  const base = normalizePublicApiBaseUrl(process.env.NEXT_PUBLIC_API_BASE_URL);
   try {
     return new URL(base).origin;
   } catch {
