@@ -49,8 +49,9 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
-  // standalone: gói sẵn node_modules cần thiết để image runtime nhỏ gọn.
-  output: 'standalone',
+  // standalone chỉ cho Docker / Node tự host. Trên Vercel + Next 16.3, bật
+  // chung với adapter của Vercel làm build fail (ENOENT next-server.js.nft.json).
+  ...(process.env.VERCEL ? {} : { output: 'standalone' as const }),
   poweredByHeader: false,
   reactStrictMode: true,
   async headers() {

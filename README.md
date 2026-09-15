@@ -21,3 +21,15 @@ npm run dev               # http://localhost:3401 — cần qltb-service chạy 
 | `npm run typecheck` | `tsc --noEmit` |
 | `npm test` | vitest |
 | `npx shadcn@latest add <tên>` | Thêm component shadcn vào `components/ui/` |
+
+## Deploy Vercel
+
+Import repo GitHub `qltb-web` thành project riêng (không chung với service).
+
+Khai **trước lần build production**:
+
+```
+NEXT_PUBLIC_API_BASE_URL=https://<qltb-service>.vercel.app/api/v1
+```
+
+`NEXT_PUBLIC_*` bị nhúng lúc build. Đổi URL API xong phải Redeploy web.
