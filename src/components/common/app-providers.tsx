@@ -3,6 +3,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useState } from 'react';
 import { ApiError } from '@/types/api';
+import { SessionProvider } from './session-provider';
 
 /**
  * `staleTime` 30 giây: dữ liệu quản trị không đổi từng giây, và mỗi lần refetch
@@ -31,5 +32,9 @@ function makeQueryClient() {
 export function AppProviders({ children }: { children: React.ReactNode }) {
   // useState để mỗi lần render lại không dựng QueryClient mới — dựng mới là mất cache.
   const [queryClient] = useState(makeQueryClient);
-  return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>;
+  return (
+    <QueryClientProvider client={queryClient}>
+      <SessionProvider>{children}</SessionProvider>
+    </QueryClientProvider>
+  );
 }

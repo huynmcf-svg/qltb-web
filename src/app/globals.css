@@ -165,3 +165,62 @@
     font-variant-numeric: tabular-nums;
   }
 }
+
+/*
+ * ── Hiệu ứng màn hình đăng nhập ────────────────────────────────
+ *
+ * Chỉ dùng ở `(auth)/login`. Mọi hiệu ứng chạy bằng `transform` và `opacity`
+ * — trình duyệt tổng hợp trên GPU, không kích hoạt layout lại.
+ */
+@keyframes qltb-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(-1deg);
+  }
+  50% {
+    transform: translate3d(0, -14px, 0) rotate(1deg);
+  }
+}
+
+@keyframes qltb-glow {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.08);
+  }
+}
+
+.qltb-float {
+  animation: qltb-float 7s ease-in-out infinite;
+}
+
+.qltb-glow {
+  animation: qltb-glow 6s ease-in-out infinite;
+}
+
+/* Lưới mờ trên panel thương hiệu, mờ dần về phía dưới. */
+.qltb-grid {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.35) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.35) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: linear-gradient(to bottom, black 20%, transparent 90%);
+}
+
+/* Chấm mờ cho cột form. */
+.qltb-dots {
+  background-image: radial-gradient(var(--border) 1px, transparent 1px);
+  background-size: 22px 22px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .qltb-float,
+  .qltb-glow {
+    animation: none;
+  }
+}

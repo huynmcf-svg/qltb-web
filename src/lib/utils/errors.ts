@@ -11,9 +11,16 @@ const MESSAGES: Record<string, string> = {
   [ERROR_CODES.AUTHORIZATION_FAILED]: 'Bạn không có quyền thực hiện thao tác này.',
   [ERROR_CODES.RESOURCE_NOT_FOUND]: 'Không tìm thấy dữ liệu.',
   [ERROR_CODES.INVALID_PAYLOAD]: 'Dữ liệu gửi lên không hợp lệ.',
-  [ERROR_CODES.DEVICE_CODE_CONFLICT]: 'Mã thiết bị đã tồn tại.',
+  [ERROR_CODES.DEVICE_SERIAL_CONFLICT]: 'Serial thiết bị đã tồn tại.',
   [ERROR_CODES.DEVICE_STATE_CONFLICT]:
     'Trạng thái thiết bị vừa thay đổi. Tải lại rồi thao tác lại.',
+  [ERROR_CODES.ENTERPRISE_CODE_CONFLICT]: 'Mã doanh nghiệp đã tồn tại.',
+  [ERROR_CODES.USERNAME_CONFLICT]: 'Tên đăng nhập đã tồn tại.',
+  [ERROR_CODES.EXCHANGE_STATE_CONFLICT]:
+    'Yêu cầu đổi trả đã được xử lý. Tải lại rồi thao tác lại.',
+  [ERROR_CODES.ENTERPRISE_USER_LIMIT]: 'Doanh nghiệp đã đủ số tài khoản cho phép.',
+  [ERROR_CODES.QUOTA_INSUFFICIENT]: 'Sản lượng còn lại không đủ.',
+  [ERROR_CODES.DEVICE_LOCKED]: 'Thiết bị đang bị khoá.',
   [ERROR_CODES.IDEMPOTENCY_KEY_CONFLICT]:
     'Thao tác này đã được gửi với nội dung khác. Tải lại trang rồi thử lại.',
   [ERROR_CODES.RATE_LIMITED]: 'Quá nhiều yêu cầu. Thử lại sau ít phút.',
